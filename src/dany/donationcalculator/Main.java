@@ -12,9 +12,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.List;
@@ -24,7 +21,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -253,6 +249,7 @@ public class Main
 						System.out.println("New donator: " + line);
 						fieldNickname.setText("");
 						fieldAmount.setText("");
+						Helper.checkForDuplicates();
 						Helper.updateDonationList(listDonationList);
 					}
 					catch (Throwable t)

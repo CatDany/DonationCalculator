@@ -5,7 +5,9 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -161,6 +163,45 @@ public class Helper
 		{
 			t.printStackTrace();
 			return "";
+		}
+	}
+	
+	public static void checkForDuplicates()
+	{
+		try
+		{
+			List<String> list = Files.readAllLines(Main.donations.toPath(), Charset.defaultCharset());
+			if (!list.isEmpty())
+			{
+				HashMap<String, Double> donations = new HashMap<String, Double>();
+				for (String i : list)
+				{
+					if (!i.isEmpty())
+					{
+						String nick = i.split(" ")[0];
+						double amount = getAmountFromLine(i);
+						if (!donations.containsKey(nick))
+						{
+							donations.put(nick, amount);
+						}
+						else
+						{
+							donations.put(nick, Double.parseDouble(doubleToString(donations.get(nick) + amount)));
+						}
+					}
+				}
+				PrintWriter dw = new PrintWriter(Main.donations);
+				for (Object o : donations.entrySet().toArray())
+				{
+					Entry<String, Double> entry = (Entry<String, Double>)o;
+					dw.append(entry.getKey() + " $" + entry.getValue() + "\n");
+				}
+				dw.close();
+			}
+		}
+		catch (Throwable t)
+		{
+			t.printStackTrace();
 		}
 	}
 }
