@@ -5,7 +5,7 @@ import org.apache.commons.codec.binary.Base64;
 public class Refs
 {
 	public static final String VERSION_STD = "r1.0";
-	public static final int VERSION_BUILD = 3;
+	public static final int VERSION_BUILD = 4;
 	public static final String VERSION = VERSION_STD + "-" + VERSION_BUILD;
 	public static final String GITHUB_URL = "http://github.com/CatDany/DonationCalculator";
 	public static final String CURRENCY_URL = "http://query.yahooapis.com/v1/public/yql?q=select%20%2a%20from%20yahoo.finance.xchange%20where%20pair%20in%20%28%22RUBUSD%22%20,%22UAHUSD%22%29&env=store://datatables.org/alltableswithkeys";
