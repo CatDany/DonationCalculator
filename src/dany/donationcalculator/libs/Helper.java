@@ -239,6 +239,7 @@ public class Helper
 				catch (Throwable t)
 				{
 					t.printStackTrace();
+					JOptionPane.showInputDialog(new JFrame(), "Something went wrong and we couldn't open downloads page!\nTry it yourself.", Refs.UPDATE_URL);
 				}
 			}
 			System.exit(0);
