@@ -50,6 +50,8 @@ public class Main
 	
 	public static void run(String[] args) throws Throwable
 	{
+		Helper.checkForUpdates();
+		
 		donations = new File("DONATIONS.txt");
 		topDonation = new File("TOP_DONATION.txt");
 		donationsInLine = new File("DONATIONS_IN_LINE.txt");

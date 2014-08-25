@@ -1,7 +1,9 @@
 package dany.donationcalculator.libs;
 
+import java.awt.Desktop;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -202,6 +204,44 @@ public class Helper
 		catch (Throwable t)
 		{
 			t.printStackTrace();
+		}
+	}
+	
+	public static boolean isOutdated()
+	{
+		InputStream in;
+		try
+		{
+			in = new URL(Refs.VERSION_CHECKER_URL).openStream();
+		}
+		catch (Throwable t)
+		{
+			t.printStackTrace();
+			return false;
+		}
+		Scanner s = new Scanner(in);
+		boolean updated = Integer.parseInt(s.next()) > Refs.VERSION_BUILD;
+		s.close();
+		return updated;
+	}
+	
+	public static void checkForUpdates()
+	{
+		if (isOutdated())
+		{
+			int browse = JOptionPane.showOptionDialog(new JFrame(), Helper.arrayToString("\n", Refs.OUTDATED), "DonationCalculator", 0, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"Update", "Close"}, "Update");
+			if (browse == 0)
+			{
+				try
+				{
+					Desktop.getDesktop().browse(new URI(Refs.UPDATE_URL));
+				}
+				catch (Throwable t)
+				{
+					t.printStackTrace();
+				}
+			}
+			System.exit(0);
 		}
 	}
 }
